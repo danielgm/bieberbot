@@ -34,8 +34,8 @@ func hook(res http.ResponseWriter, req *http.Request) {
 		msg := parseRequest(req)
 		if msg != nil && msg["token"][0] == slackToken {
 			lovesBieber := lovesJustinBieber(msg["text"][0])
-			log.Printf("Love found! user=%s, channel=%s, bieber=%t, text=\"%s\"", msg["user_name"][0], msg["channel_name"][0], lovesBieber, msg["text"][0])
 			if msg["user_name"][0] != "slackbot" && lovesBieber {
+				log.Printf("Love found! user=%s, channel=%s, bieber=%t, text=\"%s\"", msg["user_name"][0], msg["channel_name"][0], lovesBieber, msg["text"][0])
 				fmt.Fprintf(res, "{\"text\": \"I love you, too, @%s, but please remember to lock your workstation. Security is important.\"}", msg["user_name"][0])
 			}
 		}
